@@ -1,6 +1,13 @@
 # Changelog
 
-20/02/2025
+26/02/2025
+
+Version 0.0.5 NJB
+- Successfully tested on Flywheel
+
+To Do:
+clean output filename
+
 Version 0.0.2 NJB
 - refactoring the parser code
 
