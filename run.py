@@ -30,17 +30,13 @@ log = logging.getLogger(__name__)
 
 def main(context: GearToolkitContext) -> None:
     # """Parses config and runs."""
-    subject_label, session_label, input_label = parse_config(context)
+    # subject_label, session_label, input_label = parse_config(context)
     
-
-    referencePath = "/flywheel/v0/app/TemplateKhula.nii"
-
     opt = TestOptions().parse()
 
     image = sitk.ReadImage(opt.image)
-    reference = sitk.ReadImage(referencePath)
-
-    outPath = opt.result_ulf
+    reference = sitk.ReadImage(opt.reference)
+    outPath = opt.result_sr
 
     image, reference = Registration(image, reference)
     sitk.WriteImage(image, outPath)
@@ -51,6 +47,7 @@ def main(context: GearToolkitContext) -> None:
     inference(model, outPath, opt.result_sr, opt.resample, opt.new_resolution, opt.patch_size[0],
               opt.patch_size[1], opt.patch_size[2], opt.stride_inplane, opt.stride_layer, 1)
 
+    # have and option if gpu is called then have opt.result_gambas instead of opt.result_srs
 
 # Only execute if file is run as main, not when imported by another module
 if __name__ == "__main__":  # pragma: no cover

@@ -1,6 +1,16 @@
 # Changelog
 
 20/02/2025
+Version 0.0.2 NJB
+- refactoring the parser code
+
+To Do:
+** base_options needs to be updated to handle gpu selection rather than cpu default
+** need to rebuild base image to handle GPU selection
+** To run on GPU should batch process to save costs of loading Docker container each time
+
+
+20/02/2025
 Version 0.0.2 NJB, LB
 - updates to run on CPU
 - Not pushed to FW, need to rebuild from CUDA Docker image to ensure compatibility to run on GPU
