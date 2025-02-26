@@ -8,13 +8,12 @@
 !manifest.json
 !app
 !utils
-!start.sh
-!.pre-commit-config.yaml
+!options
+!models
 !.env
 !.git
 !README.md
 !requirements.txt
-!license.txt
 
 # Re-ignore pycache which might be inside package dir
 **/__pycache__

@@ -1,6 +1,6 @@
 import flywheel
 from pathlib import Path
-from base_options import BaseOptions  # BaseOptions is defined elsewhere
+from options.base_options import BaseOptions  # BaseOptions is defined elsewhere
 
 class TestOptions(BaseOptions):
     def initialize(self, parser):
@@ -12,7 +12,7 @@ class TestOptions(BaseOptions):
         config = context.config
 
         # Define default input and output directories
-        parser.add_argument("--input_dir", type=str, default="/flywheel/v0/input", help="Path to input directory")
+        parser.add_argument("--input_dir", type=str, default="/flywheel/v0/input/input", help="Path to input directory")
         parser.add_argument("--output_dir", type=str, default="/flywheel/v0/output", help="Path to output directory")
 
         # Find the first available NIfTI file in input directory

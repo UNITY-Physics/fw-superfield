@@ -24,6 +24,7 @@ class BaseModel():
         self.model_names = []
         self.visual_names = []
         self.image_paths = []
+        print('device:', self.device)
 
     def set_input(self, input):
         self.input = input

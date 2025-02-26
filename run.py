@@ -32,18 +32,22 @@ def main(context: GearToolkitContext) -> None:
     # """Parses config and runs."""
     # subject_label, session_label, input_label = parse_config(context)
     
+    print('Parsing config')
     opt = TestOptions().parse()
 
     image = sitk.ReadImage(opt.image)
     reference = sitk.ReadImage(opt.reference)
     outPath = opt.result_sr
 
+    print('Registering images')
     image, reference = Registration(image, reference)
     sitk.WriteImage(image, outPath)
 
+    print('Creating model')
     model = create_model(opt)
     model.setup(opt)
 
+    print('Running inference')
     inference(model, outPath, opt.result_sr, opt.resample, opt.new_resolution, opt.patch_size[0],
               opt.patch_size[1], opt.patch_size[2], opt.stride_inplane, opt.stride_layer, 1)
 

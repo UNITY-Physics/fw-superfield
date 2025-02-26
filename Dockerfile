@@ -17,4 +17,4 @@ COPY ./ $FLYWHEEL/
 RUN bash -c 'chmod +rx $FLYWHEEL/run.py' && \
     bash -c 'chmod +rx $FLYWHEEL/app/'
 
-ENTRYPOINT ["bash", "/flywheel/v0/run.py"] 
+ENTRYPOINT ["python3", "/flywheel/v0/run.py"] 
