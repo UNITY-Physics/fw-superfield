@@ -14,6 +14,17 @@ def parse_config(context):
         app_options: options to pass to the app
     """
 
+    # Extract tags from the destination analysis container
+    tags = context.destination.get("tags", [])
+
+    # Check if 'gpu' is in the list of tags
+    if "gpu" in tags:
+        print("GPU processing enabled.")
+        model = 'gambas'
+    else:
+        print("GPU processing not requested.")
+        model = 'SR'
+
     # Get the input file id
     input_container = context.client.get_analysis(context.destination["id"])
 
@@ -33,22 +44,25 @@ def parse_config(context):
     session_label = session.label
     session_label = session_label.replace(" ", "_")
     print("session label: ", session.label)
-    
-
-    # -------------------  Get Acquisition label -------------------  #
 
     # Specify the directory you want to list files from
     directory_path = '/flywheel/v0/input/input'
-    # List all files in the specified directory
+
     for filename in os.listdir(directory_path):
         if os.path.isfile(os.path.join(directory_path, filename)):
-            filename_without_extension = filename.split('.')[0]
+            filename_without_extension = filename.split('.')[0]  # Remove extension
             no_white_spaces = filename_without_extension.replace(" ", "")
-            # no_white_spaces = filename.replace(" ", "")
+            
+            # Replace non-alphanumeric characters with underscores
             cleaned_string = re.sub(r'[^a-zA-Z0-9]', '_', no_white_spaces)
-            input_label = cleaned_string.rstrip('_') # remove trailing underscore
+            input_label = cleaned_string.rstrip('_')  # Remove trailing underscores
+            
+            # Remove leading numbers and any remaining leading underscores
+            input_label = re.sub(r'^\d+_?', '', input_label)
 
-    print("Input label: ", input_label)
+            print("Input label:", input_label)
 
-    # gear_inputs, 
-    return subject_label, session_label, input_label
+    output_label = 'sub-' + subject_label + '_ses-' + session_label + '_acq-' + input_label + '_rec-' + model +'.nii.gz'
+    print("output_label:", output_label)
+    
+    return output_label
