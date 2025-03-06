@@ -48,21 +48,45 @@ def parse_config(context):
     # Specify the directory you want to list files from
     directory_path = '/flywheel/v0/input/input'
 
+    # Define relevant keywords to keep
+    allowed_keywords = ["T2w", "T1w", "T2", "T1", "AXI", "SAG", "COR", "Fast"]
+
+    # Define diagnostic-related terms to remove
+    diagnostic_terms = ["DIAGNOSTIC", "NOT_FOR_DIAGNOSTIC_USE", "NOTDIAGNOSTIC"]
+
     for filename in os.listdir(directory_path):
         if os.path.isfile(os.path.join(directory_path, filename)):
-            filename_without_extension = filename.split('.')[0]  # Remove extension
-            no_white_spaces = filename_without_extension.replace(" ", "")
+            filename_without_extension = filename.rsplit('.', 1)[0]  # Remove file extension
             
-            # Replace non-alphanumeric characters with underscores
-            cleaned_string = re.sub(r'[^a-zA-Z0-9]', '_', no_white_spaces)
-            input_label = cleaned_string.rstrip('_')  # Remove trailing underscores
+            # Remove diagnostic-related terms (case insensitive)
+            for term in diagnostic_terms:
+                filename_without_extension = re.sub(term, '', filename_without_extension, flags=re.IGNORECASE)
+
+            # Replace non-alphanumeric characters with underscores (preserve letters/numbers)
+            cleaned_string = re.sub(r'[^a-zA-Z0-9]', '_', filename_without_extension)
             
-            # Remove leading numbers and any remaining leading underscores
-            input_label = re.sub(r'^\d+_?', '', input_label)
+            # Remove trailing underscores
+            cleaned_string = cleaned_string.rstrip('_')
+
+            # Extract relevant keywords
+            extracted_keywords = [word for word in allowed_keywords if word in cleaned_string]
+
+            # Ensure "T1" and "T2" are converted to "T1w" and "T2w"
+            formatted_keywords = [
+                "T1w" if word == "T1" else "T2w" if word == "T2" else word
+                for word in extracted_keywords
+            ]
+
+            # Construct the final input label
+            if formatted_keywords:
+                input_label = "_".join(formatted_keywords)
+            else:
+                # Fallback: remove leading numbers and underscores
+                input_label = re.sub(r'^\d+_?', '', cleaned_string)
 
             print("Input label:", input_label)
 
-    output_label = 'sub-' + subject_label + '_ses-' + session_label + '_acq-' + input_label + '_rec-' + model +'.nii.gz'
-    print("output_label:", output_label)
+            output_label = f'sub-{subject_label}_ses-{session_label}_acq-{input_label}.nii.gz'
+            print("Output label:", output_label)
     
     return output_label

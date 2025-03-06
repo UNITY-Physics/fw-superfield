@@ -26,7 +26,7 @@ class TestOptions(BaseOptions):
 
         parser.add_argument("--image", type=str, default=str(input_files[0]), help="Path to input NIfTI image")
         parser.add_argument("--reference", type=str, default="/flywheel/v0/app/TemplateKhula.nii", help="Path to reference NIfTI image")
-        parser.add_argument("--result_gambas", type=str, default=str(Path(parser.get_default("output_dir")) / f"{input_files[0].stem}_gambas.nii.gz"), help="Path to save the result NIfTI file")
+        # parser.add_argument("--result_gambas", type=str, default=str(Path(parser.get_default("output_dir")) / f"{input_files[0].stem}_gambas.nii.gz"), help="Path to save the result NIfTI file")
         parser.add_argument("--result_sr", type=str, default=str(Path(parser.get_default("output_dir")) / output_label), help="Path to save the result NIfTI file")
         
         # Parse additional configuration arguments
