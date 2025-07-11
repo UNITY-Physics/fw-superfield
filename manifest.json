@@ -1,13 +1,8 @@
 {
   "author": "Di Fan, Niall Bourke",
-  "cite": "",
+  "cite": "Tapp, A. et al. (2024). Super-Field MRI Synthesis for Infant Brains Enhanced by Dual Channel Latent Diffusion. In: Linguraru, M.G., et al. Medical Image Computing and Computer Assisted Intervention – MICCAI 2024. MICCAI 2024. Lecture Notes in Computer Science, vol 15003. Springer, Cham. https://doi.org/10.1007/978-3-031-72384-1_42",
   "command": "python /flywheel/v0/run.py",
   "config": {
-    "gpu": {
-      "type": "boolean",
-      "default": false,
-      "description": "Set if running GAMBAS model on GPU"
-    },
     "phase": {
       "type": "string",
       "default": "test",
@@ -50,7 +45,7 @@
     },
     "gear-builder": {
       "category": "analysis",
-      "image": "difan0224/superfield:0.1.0"
+      "image": "flywheel/superfield:0.2.0"
     },
     "kcl-app-binary": "SF.sh",
     "kcl-app-modalities": [
@@ -65,7 +60,7 @@
       "non-commercial-use-only": false
     }
   },
-  "description": "Generalised-Hilbert Mamba for Super-resolution of Paediatric Ultra-Low-Field MRI. GPU enabled runs will run the GAMBAS model on the input image to generate a super-resolved image. CPU runs will be slower and have slightly degraded performance and is based of a Residual Convolution Network model. The model is based on the U-Net architecture and is trained on a dataset of paediatric ultra-low-field MRI images (3 months - 3 years).",
+  "description": "Super-Field Network (SFNet), a custom swinUNETRv2 with generative adversarial network components that uses uLF MRIs to generate super-field (SF) images comparable to HF MRIs (aged 0–2 years). ** Note: This app requires a GPU to run. Include 'gpu' as a tag when running a job **",
   "environment": {
     "FLYWHEEL": "/flywheel/v0",
     "LANG": "C.UTF-8",
@@ -129,7 +124,7 @@
   "license": "MIT",
   "maintainer": "Di Fan <difan@chla.usc.edu>",
   "name": "superfield",
-  "source": "https://github.com/levente-1/GAMBAS/tree/fw-dev",
+  "source": "https://github.com/UNITY-Physics/fw-superfield",
   "url": "",
-  "version": "0.1.0"
+  "version": "0.2.0"
 }
