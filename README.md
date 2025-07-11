@@ -20,7 +20,7 @@ The output file labels are based on the BIDS standard, taking the input file nam
 **url:** <https://github.com/UNITY-Physics/fw-superfield.git>
 
 **cite:**  
-Baljer, L., Zhang, Y., Bourke, N.J., Donald, K.A., Bradford, L.E., Ringshaw, J.E., Williams, S.R., Deoni, S.C.L., Williams, S.C.R., , Váša, F. and Moran, R.J. (2025), Ultra-Low-Field Paediatric MRI in Low- and Middle-Income Countries: Super-Resolution Using a Multi-Orientation U-Net. Hum Brain Mapp, 46: e70112. https://doi.org/10.1002/hbm.70112
+Tapp, A. et al. (2024). Super-Field MRI Synthesis for Infant Brains Enhanced by Dual Channel Latent Diffusion. In: Linguraru, M.G., et al. Medical Image Computing and Computer Assisted Intervention – MICCAI 2024. MICCAI 2024. Lecture Notes in Computer Science, vol 15003. Springer, Cham. https://doi.org/10.1007/978-3-031-72384-1_42
 
 ### Classification
 
